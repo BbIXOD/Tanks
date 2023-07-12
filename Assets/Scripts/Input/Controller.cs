@@ -40,6 +40,7 @@ public class Controller : MonoBehaviour
         
 
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnDisable()
@@ -52,6 +53,7 @@ public class Controller : MonoBehaviour
         _controls.Menu.SetActive.performed -= SetActive;
 
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

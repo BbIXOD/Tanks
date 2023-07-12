@@ -24,11 +24,17 @@ public class Penetrator : MonoBehaviour
         _bullet = GetComponent<Bullet>();
     }
 
+    private void Start()
+    {
+        FixedUpdate();
+    }
+
     private void FixedUpdate()
     {
         var maxDist = _bullet.Speed * Time.fixedDeltaTime;
         var hits = new RaycastHit[BufferSize];
-        var length = Physics.RaycastNonAlloc(_bullet.newPos, _bullet.newForward, hits, maxDist);
+        var length = Physics.RaycastNonAlloc
+            (_bullet.myTransform.position, _bullet.myTransform.forward, hits, maxDist);
         //hits = hits[..length].OrderBy(hit => hit.distance).ToArray();
         
         for (var i = 0; i < length; i++)
@@ -59,8 +65,8 @@ public class Penetrator : MonoBehaviour
         if (!isArmour)
         {
             return;
-        }    
-            
+        }
+
         var chicness = armour.solidity * _bullet.armourMult
                        / Mathf.Cos(Vector3.Angle(hit.normal, -transform.forward) * Mathf.Deg2Rad);
         

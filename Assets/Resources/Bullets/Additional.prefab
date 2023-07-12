@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d71d7e7c796b7147931bafbbe45230a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 0
   airFriction: 5
   airRotation: 0.1
   armourMult: 3

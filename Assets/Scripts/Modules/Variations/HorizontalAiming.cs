@@ -29,7 +29,5 @@ public class HorizontalAiming : Aiming
         var angles = tr.localEulerAngles;
         angles.y = desiredAngle;
         tr.localEulerAngles = angles;
-        
-        Debug.Log(desiredAngle);
     }
 }

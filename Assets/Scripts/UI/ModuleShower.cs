@@ -7,25 +7,33 @@ public class ModuleShower : MonoBehaviour
 {
     [SerializeField]private float maxHeight;
     [SerializeField]private GameObject textInstance;
+    private TMP_Text _textTMP; 
     
     private readonly List<Transform> _textTransforms = new();
 
+    private PhotonView _view;
+
     private void Awake()
     {
-        enabled = PhotonNetwork.IsMasterClient;
+        _view = GetComponent<PhotonView>();
+        _textTMP = textInstance.GetComponent<TMP_Text>();
     }
 
-    //todo: introduce variables for transform
     public void ShowDamage(float health, float maxHealth, string caption)
     {
-        var text = PhotonNetwork.Instantiate(textInstance.name, Vector3.zero, transform.rotation);
-        text.transform.SetParent(transform, false);
-
-        var textTMP = text.GetComponent<TMP_Text>();
-        textTMP.text = caption;
+        _view.RPC("TextOutDamage", RpcTarget.All, health, maxHealth, caption);
+    }
+    
+    
+    [PunRPC]
+    private void TextOutDamage(float health, float maxHealth, string caption)
+    {
+        _textTMP.text = caption;
 
         var green = health / maxHealth;
-        textTMP.color = new Color(1 - green, green, 0);
+        _textTMP.color = new Color(1 - green, green, 0);
+
+        var text = Instantiate(textInstance, transform);
         _textTransforms.Add(text.transform);
     }
 
@@ -34,7 +42,7 @@ public class ModuleShower : MonoBehaviour
         for (var i = 0; i < _textTransforms.Count; i++)
         {
             var text = _textTransforms[i];
-            text.Translate(text.TransformDirection(Vector3.up) * Time.deltaTime);
+            text.Translate(Vector3.up * Time.deltaTime);
 
             if (text.localPosition.y < maxHeight)
             {
@@ -42,7 +50,7 @@ public class ModuleShower : MonoBehaviour
             }
             
             _textTransforms.Remove(text);
-            PhotonNetwork.Destroy(text.gameObject);
+            Destroy(text.gameObject);
         }
     }
 }

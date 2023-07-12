@@ -14,7 +14,7 @@ public class MenuController
         {
             return;
         }
-        _menu = GameObject.Find(Menu);
+        _menu = CanvasHandler.menu;
         _menu.SetActive(_enabled);
     }
 

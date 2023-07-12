@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using Photon.Pun;
 
-public class Respawn : MonoBehaviour
+public class Respawn : MonoBehaviourPunCallbacks
 {
     private PhotonView _view;
     private bool _onQuit;

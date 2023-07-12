@@ -9,17 +9,16 @@ public class Module : MonoBehaviour, IModule, IPunObservable
     public float Health { get => health; set => SetHealthRPC(value); }
     [SerializeField]private GameObject connectedObject;
     [SerializeField]private ModuleShower shower;
-    private PhotonView _view;
+    public PhotonView view;
     
     private bool _destroyed;
 
     private void Awake()
     {
-        _view = GetComponent<PhotonView>();
+        view = GetComponent<PhotonView>();
         
-        if (!_view.IsMine)
+        if (!view.IsMine)
         {
-            enabled = false;
             return;
         }
         _maxHealth = health;
@@ -27,13 +26,13 @@ public class Module : MonoBehaviour, IModule, IPunObservable
 
     private void SetHealthRPC(float value)
     {
-        if (_view.IsMine)
+        if (view.IsMine)
         {
             SetHealth(value);
         }
         else
         {
-            _view.RPC("SetHealth", _view.Owner, value);
+            view.RPC("SetHealth", view.Owner, value);
         }
     }
     
@@ -52,8 +51,26 @@ public class Module : MonoBehaviour, IModule, IPunObservable
             return;
         }
 
-        PhotonNetwork.Destroy(connectedObject);
+        view.RPC("OnDestroyed", RpcTarget.All);
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) { }
+    
+    //todo: maybe put this in func below
+    [PunRPC]
+    private void OnDestroyed()
+    {
+        Destroy(connectedObject);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(health);
+        }
+        else
+        {
+            health = (float)stream.ReceiveNext();
+        }
+    }
 }
