@@ -1,12 +1,13 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
     private const string TankFolder = "Tanks/";
     private Transform[] _spawns;
-    [SerializeField]private GameObject canvas, menu;
+    [SerializeField]private GameObject canvas, menu, player;
 
     private bool _leaving;
     
@@ -27,6 +28,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         _leaving = true;
+        PhotonNetwork.Destroy(player);
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel("StartRoom");
     }
@@ -44,6 +46,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         return list;
     }
 
+    //todo: remove magic numbers
     private void CreateCanvas()
     {
         var curCanvas = Instantiate(canvas);
@@ -51,6 +54,10 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         CanvasHandler.gunSight = curCanvas.transform.GetChild(1);
 
         CanvasHandler.menu = Instantiate(menu);
+        var button = CanvasHandler.menu.transform.GetComponentInChildren<Button>();
+        button.onClick.AddListener(LeaveRoom);
+
+
     }
 
     public void SpawnPlayer()
@@ -62,8 +69,8 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         
         var spawn = _spawns[Random.Range(0, _spawns.Length)];
 
-        PhotonNetwork.Instantiate
-        (TankFolder + PlayerPrefs.GetString(PlayerPrefsKeys.TankModel),
+        player = PhotonNetwork.Instantiate
+        (TankFolder + PlayerPrefsKeys.tankModel,
             spawn.position, spawn.rotation);
     }
 }

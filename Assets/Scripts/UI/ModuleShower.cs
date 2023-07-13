@@ -7,6 +7,7 @@ public class ModuleShower : MonoBehaviour
 {
     [SerializeField]private float maxHeight;
     [SerializeField]private GameObject textInstance;
+    private Transform _camera;
     private TMP_Text _textTMP; 
     
     private readonly List<Transform> _textTransforms = new();
@@ -15,6 +16,7 @@ public class ModuleShower : MonoBehaviour
 
     private void Awake()
     {
+        _camera = Camera.main!.transform;
         _view = GetComponent<PhotonView>();
         _textTMP = textInstance.GetComponent<TMP_Text>();
     }
@@ -43,6 +45,7 @@ public class ModuleShower : MonoBehaviour
         {
             var text = _textTransforms[i];
             text.Translate(Vector3.up * Time.deltaTime);
+            text.LookAt(_camera);
 
             if (text.localPosition.y < maxHeight)
             {

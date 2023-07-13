@@ -15,7 +15,7 @@ public class View : MonoBehaviour
     private PhotonView _view;
     [SerializeField] private Transform anchor;
     
-    private readonly Vector3 _offset = new(0, 2, -5);
+    private readonly Vector3 _offset = new(0, 3, -7);
 
     private void Awake()
     {

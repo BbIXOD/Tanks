@@ -254,6 +254,7 @@ MonoBehaviour:
   caption: Hull damaged
   connectedObject: {fileID: 3300328199251652668}
   shower: {fileID: 6680556375524045300}
+  view: {fileID: 0}
 --- !u!114 &5007189555964770182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +915,7 @@ GameObject:
   - component: {fileID: 3300328199377221470}
   - component: {fileID: 8934570788314950141}
   m_Layer: 0
-  m_Name: T101
+  m_Name: T-101
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1504,6 +1505,7 @@ MonoBehaviour:
   caption: Tank damaged
   connectedObject: {fileID: 3300328199377221445}
   shower: {fileID: 6680556375524045300}
+  view: {fileID: 0}
 --- !u!114 &2460281775587923560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,6 +1772,7 @@ MonoBehaviour:
   caption: Hull damaged
   connectedObject: {fileID: 3300328197867171993}
   shower: {fileID: 6680556375524045300}
+  view: {fileID: 0}
 --- !u!114 &2322661388636948944
 MonoBehaviour:
   m_ObjectHideFlags: 0

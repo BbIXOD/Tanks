@@ -1,6 +1,5 @@
 public static class PlayerPrefsKeys
 {
-    public const string 
-        TankModel = nameof(TankModel),
-        Sensitivity = nameof(Sensitivity);
+    public static string tankModel;
+    public static float sensitivity = 0.5f;
 }

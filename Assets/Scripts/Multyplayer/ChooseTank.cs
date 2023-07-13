@@ -13,6 +13,6 @@ public class ChooseTank : MonoBehaviour
 
     public void SetModel()
     {
-        PlayerPrefs.SetString(PlayerPrefsKeys.TankModel, _tanks.options[_tanks.value].text);
+        PlayerPrefsKeys.tankModel =  _tanks.options[_tanks.value].text;
     }
 }

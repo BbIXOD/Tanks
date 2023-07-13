@@ -12,7 +12,7 @@ public class HorizontalAiming : Aiming
 
         var desiredForward = desired;
         desiredForward.y = pForward.y;
-        
+
         var speed = rotationSpeed * Time.fixedDeltaTime / Vector3.Angle(myForward, desiredForward);
 
         myForward = Vector3.Slerp(myForward, desiredForward, speed);

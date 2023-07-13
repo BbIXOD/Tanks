@@ -30,7 +30,7 @@ public class Controller : MonoBehaviour
         _cannons = GetComponentsInChildren<Cannon>();
         _menu = new MenuController(_view);
 
-        _sensitivity = PlayerPrefs.GetFloat(PlayerPrefsKeys.Sensitivity);
+        _sensitivity = PlayerPrefsKeys.sensitivity;
     }
 
     private void OnEnable()
@@ -40,7 +40,6 @@ public class Controller : MonoBehaviour
         
 
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void OnDisable()
@@ -53,7 +52,6 @@ public class Controller : MonoBehaviour
         _controls.Menu.SetActive.performed -= SetActive;
 
         Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -73,7 +71,7 @@ public class Controller : MonoBehaviour
         else
         {
             _controls.Basic.Enable();
-            _sensitivity = PlayerPrefs.GetFloat(PlayerPrefsKeys.Sensitivity);
+            _sensitivity = PlayerPrefsKeys.sensitivity;
         }
         _menu.ChangeActivity();
     }

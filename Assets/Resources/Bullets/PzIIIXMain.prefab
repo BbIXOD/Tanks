@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4805824662672354910}
   - component: {fileID: 2634448199530464128}
   - component: {fileID: 7982835637903092662}
-  - component: {fileID: 3399158791105551676}
-  - component: {fileID: -5147235102737835635}
+  - component: {fileID: 4880885581542179879}
+  - component: {fileID: 5326290752346169736}
   m_Layer: 0
-  m_Name: Additional
+  m_Name: PzIIIXMain
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 737422870803833053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8274939552162590899}
@@ -48,11 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d71d7e7c796b7147931bafbbe45230a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
-  airFriction: 5
-  airRotation: 0.1
-  armourMult: 3
-  damage: 10
+  speed: 150
+  airFriction: 0.9
+  airRotation: 0.2
+  armourMult: 1.1
+  damage: 75
   lastingTime: 1000
 --- !u!114 &7982835637903092662
 MonoBehaviour:
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da83423c48389064c98e259a06e5fbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3399158791105551676
+--- !u!114 &4880885581542179879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,11 +85,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -5147235102737835635}
+  - {fileID: 5326290752346169736}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-5147235102737835635
+--- !u!114 &5326290752346169736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
