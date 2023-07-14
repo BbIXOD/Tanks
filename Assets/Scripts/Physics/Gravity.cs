@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Gravity : MonoBehaviour
@@ -13,6 +12,6 @@ public class Gravity : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.AddForce(Vector3.down * scale, ForceMode.Acceleration);
+        _rb.AddForce(0, -scale * Time.fixedDeltaTime, 0, ForceMode.Acceleration);
     }
 }
