@@ -62,6 +62,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Identify"",
+                    ""type"": ""Button"",
+                    ""id"": ""febe7560-635d-41f5-ae0e-c1b79ccefe64"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f67963f-3d76-4be1-848b-b0195f143bf2"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Identify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -198,6 +218,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Basic_Aiming = m_Basic.FindAction("Aiming", throwIfNotFound: true);
         m_Basic_Shooting = m_Basic.FindAction("Shooting", throwIfNotFound: true);
         m_Basic_Reload = m_Basic.FindAction("Reload", throwIfNotFound: true);
+        m_Basic_Identify = m_Basic.FindAction("Identify", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_SetActive = m_Menu.FindAction("SetActive", throwIfNotFound: true);
@@ -266,6 +287,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Basic_Aiming;
     private readonly InputAction m_Basic_Shooting;
     private readonly InputAction m_Basic_Reload;
+    private readonly InputAction m_Basic_Identify;
     public struct BasicActions
     {
         private @Controls m_Wrapper;
@@ -274,6 +296,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Aiming => m_Wrapper.m_Basic_Aiming;
         public InputAction @Shooting => m_Wrapper.m_Basic_Shooting;
         public InputAction @Reload => m_Wrapper.m_Basic_Reload;
+        public InputAction @Identify => m_Wrapper.m_Basic_Identify;
         public InputActionMap Get() { return m_Wrapper.m_Basic; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -295,6 +318,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @Identify.started += instance.OnIdentify;
+            @Identify.performed += instance.OnIdentify;
+            @Identify.canceled += instance.OnIdentify;
         }
 
         private void UnregisterCallbacks(IBasicActions instance)
@@ -311,6 +337,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @Identify.started -= instance.OnIdentify;
+            @Identify.performed -= instance.OnIdentify;
+            @Identify.canceled -= instance.OnIdentify;
         }
 
         public void RemoveCallbacks(IBasicActions instance)
@@ -389,6 +418,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnAiming(InputAction.CallbackContext context);
         void OnShooting(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnIdentify(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

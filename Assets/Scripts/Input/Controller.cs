@@ -36,8 +36,9 @@ public class Controller : MonoBehaviour
     private void OnEnable()
     {
         _controls.Enable();
+        _controls.Basic.Identify.performed += Identify;
         _controls.Menu.SetActive.performed += SetActive;
-        
+
 
         Cursor.visible = false;
     }
@@ -112,6 +113,11 @@ public class Controller : MonoBehaviour
         {
             cannon.RechargeClip();
         }
+    }
+
+    private void Identify(InputAction.CallbackContext context)
+    {
+        
     }
 }
 
