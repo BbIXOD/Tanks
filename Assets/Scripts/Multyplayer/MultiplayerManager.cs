@@ -7,7 +7,8 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
 {
     private const string TankFolder = "Tanks/";
     private Transform[] _spawns;
-    [SerializeField]private GameObject canvas, menu, player;
+    [SerializeField]private GameObject canvas, menu;
+     private GameObject player;
 
     private bool _leaving;
     
@@ -52,6 +53,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         var curCanvas = Instantiate(canvas);
         CanvasHandler.cameraSight = curCanvas.transform.GetChild(0);
         CanvasHandler.gunSight = curCanvas.transform.GetChild(1);
+        CanvasHandler.healthHolder = curCanvas.transform.GetChild(2);
 
         CanvasHandler.menu = Instantiate(menu);
         var button = CanvasHandler.menu.transform.GetComponentInChildren<Button>();

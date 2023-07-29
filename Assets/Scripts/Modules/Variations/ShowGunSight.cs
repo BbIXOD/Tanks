@@ -4,7 +4,9 @@ using UnityEngine;
 public class ShowGunSight : MonoBehaviour
 {
     private Camera _camera;
-    private Transform _sight;
+    private Transform _sight, _myTr;
+
+    private bool _showing;
 
     private void Awake()
     {
@@ -18,12 +20,12 @@ public class ShowGunSight : MonoBehaviour
         
         _sight = CanvasHandler.gunSight;
         _camera = Camera.main;
+        _myTr = transform;
     }
 
     private void Update()
     {
-        var tr = transform;
-        var pos = new Ray(tr.position, tr.forward).PointOfHit();
+        var pos = new Ray(_myTr.position, _myTr.forward).PointOfHit();
 
         _sight.position = _camera.WorldToScreenPoint(pos);
     }

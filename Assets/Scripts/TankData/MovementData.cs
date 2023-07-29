@@ -6,7 +6,7 @@ public class MovementData : MonoBehaviour
         speed,
         reverseSpeed,
         innerTurn,
-        outerTurn;
+        turnSpeed;
 
     [SerializeField] public float enginePower;
 

@@ -1,27 +1,27 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
 public class Module : MonoBehaviour, IModule, IPunObservable
 {
     [SerializeField]private float health;
-    private float _maxHealth;
-    [SerializeField] private string caption;
+    [NonSerialized] public float maxHealth;
+    public string caption;
     public float Health { get => health; set => SetHealthRPC(value); }
     [SerializeField]private GameObject connectedObject;
-    [SerializeField]private ModuleShower shower;
     public PhotonView view;
     
     private bool _destroyed;
 
     private void Awake()
     {
+        maxHealth = health;
         view = GetComponent<PhotonView>();
         
         if (!view.IsMine)
         {
             return;
         }
-        _maxHealth = health;
     }
 
     private void SetHealthRPC(float value)
@@ -39,11 +39,6 @@ public class Module : MonoBehaviour, IModule, IPunObservable
     [PunRPC]
     public void SetHealth(float value)
     {
-        if (value < health)
-        {
-            shower.ShowDamage(health, _maxHealth, caption);
-        }
-
         health = value;
 
         if (health > 0)

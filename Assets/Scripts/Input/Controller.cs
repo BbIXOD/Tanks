@@ -10,6 +10,7 @@ public class Controller : MonoBehaviour
     private PhotonView _view;
     private Cannon[] _cannons;
     private MenuController _menu;
+    private Scanner _scanner;
     
     private float _sensitivity;
 
@@ -28,6 +29,7 @@ public class Controller : MonoBehaviour
         _movable = GetComponent<IMovable>();
         _playerView = GetComponent<View>();
         _cannons = GetComponentsInChildren<Cannon>();
+        _scanner = GetComponentInChildren<Scanner>();
         _menu = new MenuController(_view);
 
         _sensitivity = PlayerPrefsKeys.sensitivity;
@@ -117,7 +119,7 @@ public class Controller : MonoBehaviour
 
     private void Identify(InputAction.CallbackContext context)
     {
-        
+        _scanner.Scan();
     }
 }
 

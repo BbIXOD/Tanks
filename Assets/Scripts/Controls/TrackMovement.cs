@@ -15,7 +15,7 @@ public class TrackMovement : MonoBehaviour, IMovable
     {
         if (dir.y == 0)
         {
-            leftTrack.power = dir.x * _movementData.speed;
+            leftTrack.power = dir.x * _movementData.turnSpeed;
             rightTrack.power = -leftTrack.power;
             
         }
@@ -29,10 +29,8 @@ public class TrackMovement : MonoBehaviour, IMovable
             {
                 case < 0:
                     leftTrack.power *= _movementData.innerTurn;
-                    rightTrack.power *= _movementData.outerTurn;
                     break;
                 case > 0:
-                    leftTrack.power *= _movementData.outerTurn;
                     rightTrack.power *= _movementData.innerTurn;
                     break;
             }
