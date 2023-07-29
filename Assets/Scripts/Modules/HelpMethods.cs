@@ -19,7 +19,7 @@ public static class HelpMethods
     
     public static bool BetweenOuter(this float value, float min, float max)
     {
-        return value <= min && value >= max;
+        return value <= min || value >= max;
     }
 
     public static float WrapAngle(this float value)
