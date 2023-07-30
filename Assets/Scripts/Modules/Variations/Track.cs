@@ -3,28 +3,25 @@ using UnityEngine;
 
 public class Track : MonoBehaviour
 {
-    [NonSerialized]public float power;
-    private Rigidbody _rigidbody;
-    private MovementData _movementData;
-    [SerializeField]private GroundChecker checker;
+    [NonSerialized]public float power, torque, sideFric;
+    private WheelCollider[] _wheels;
+
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _movementData = GetComponentInParent<MovementData>();
+        _wheels = GetComponentsInChildren<WheelCollider>();
     }
 
     private void FixedUpdate()
     {
-        if (!checker.OnGround)
+        power *= Time.timeScale;
+        foreach (var wheel in _wheels)
         {
-            return;
+            wheel.brakeTorque = torque;
+            wheel.motorTorque = power;
+            var sf = wheel.sidewaysFriction;
+            sf.stiffness = sideFric;
+            wheel.sidewaysFriction = sf;
         }
-
-        power *= Time.fixedDeltaTime;
-
-
-        _rigidbody.velocity = transform.forward
-                              * Mathf.Lerp(_rigidbody.velocity.x, power, _movementData.enginePower);
     }
 }
