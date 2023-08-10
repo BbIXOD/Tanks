@@ -30,7 +30,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     { 
-        //PhotonNetwork.NickName = CheckNickName(nickname.text);
+        PhotonNetwork.NickName = CheckNickName(nickname.text);
 
         PhotonNetwork.JoinOrCreateRoom(CheckID(id.text), null, null);
     }

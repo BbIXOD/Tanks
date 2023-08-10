@@ -9,11 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 940722390411842803}
-  - component: {fileID: 2179798093387383081}
   - component: {fileID: 4455282674457474255}
   - component: {fileID: 2297452039977466889}
   - component: {fileID: 1651476167580571385}
-  - component: {fileID: 6163610703053538795}
   m_Layer: 0
   m_Name: track
   m_TagString: Untagged
@@ -38,22 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &2179798093387383081
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451994572301618761}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &4455282674457474255
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -83,8 +65,8 @@ MonoBehaviour:
   health: 150
   caption: Track damaged
   connectedObject: {fileID: 451994572301618761}
-  shower: {fileID: 0}
   view: {fileID: 1651476167580571385}
+  showable: 1
 --- !u!114 &1651476167580571385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,19 +90,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6163610703053538795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451994572301618761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6729d1b4c96bf9245839e8ae829bdcb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checker: {fileID: 2461797565035816363}
 --- !u!1 &4206753503942520415
 GameObject:
   m_ObjectHideFlags: 0

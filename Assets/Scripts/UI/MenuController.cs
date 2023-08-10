@@ -14,7 +14,7 @@ public class MenuController
         {
             return;
         }
-        _menu = CanvasHandler.menu;
+        _menu = SingletonHandler.menu;
         _menu.SetActive(_enabled);
     }
 

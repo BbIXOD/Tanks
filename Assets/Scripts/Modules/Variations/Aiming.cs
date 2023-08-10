@@ -26,7 +26,7 @@ public abstract class Aiming : MonoBehaviour
         }
         
         _cameraMain = Camera.main;
-        _placeToAim = CanvasHandler.cameraSight;
+        _placeToAim = SingletonHandler.cameraSight;
     }
 
     protected void FixedUpdate()

@@ -3,29 +3,36 @@ using UnityEngine;
 
 public class Scanner : MonoBehaviour
 {
-    private float _timer = MaxTime;
-    private const float MaxTime = 60;
+    private float _timer;
+    private const float MaxTime = 3;
 
     private readonly List<GameObject> _showers = new();
     private Transform _wrapper;
+    
+    private bool _hidden;
 
     private void Awake()
     {
-        _wrapper = CanvasHandler.healthHolder;
+        _wrapper = SingletonHandler.healthHolder;
         _wrapper.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        _timer -= Time.fixedDeltaTime;
+        if (_timer > 0)
+        {
+            _timer -= Time.fixedDeltaTime;
+            return;
+        }
         
-        if (_timer > 0) return;
-
+        if (_hidden) return;
         Hide();
+        _hidden = true;
     }
 
     public void Scan()
     {
+        _hidden = false;
         var tr = transform;
         
         if (!Physics.Raycast(tr.position, tr.forward, out var hit))

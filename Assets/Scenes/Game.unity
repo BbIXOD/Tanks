@@ -606,6 +606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 233561458}
   - component: {fileID: 233561459}
+  - component: {fileID: 233561460}
   m_Layer: 0
   m_Name: MultyplayerManager
   m_TagString: Untagged
@@ -646,7 +647,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 3866629837306324230, guid: 5deacd3e2ae3dfd41984b0e7afd9b86a, type: 3}
   menu: {fileID: 5355873176925339748, guid: 375e0df65583e184dbf1759b48057a3f, type: 3}
-  player: {fileID: 0}
+--- !u!114 &233561460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233561457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a356d9f533e0243ad36fbbf6c39a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textInstance: {fileID: 5778973532739482588, guid: 17b12e9937e3b504a9f204c8abefbbcc, type: 3}
 --- !u!1 &315065488
 GameObject:
   m_ObjectHideFlags: 0

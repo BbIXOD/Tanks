@@ -18,7 +18,7 @@ public class ShowGunSight : MonoBehaviour
             return;
         }
         
-        _sight = CanvasHandler.gunSight;
+        _sight = SingletonHandler.gunSight;
         _camera = Camera.main;
         _myTr = transform;
     }

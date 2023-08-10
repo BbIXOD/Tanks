@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class MovementData : MonoBehaviour
 {
-    [SerializeField] public float
+    public float
         speed,
         reverseSpeed,
-        innerTurn,
-        turnSpeed;
-
-    [SerializeField] public float enginePower;
+        turnSpeedMult,
+        turnOnStand,
+        turnOnMove,
+        enginePower,
+        breakPower;
 
 }

@@ -10,34 +10,30 @@ public class Module : MonoBehaviour, IModule, IPunObservable
     public float Health { get => health; set => SetHealthRPC(value); }
     [SerializeField]private GameObject connectedObject;
     public PhotonView view;
+
+    private string _ownerName;
     
     private bool _destroyed;
+    public bool showable = true;
 
     private void Awake()
     {
         maxHealth = health;
         view = GetComponent<PhotonView>();
-        
-        if (!view.IsMine)
-        {
-            return;
-        }
+
+        _ownerName = view.Owner.NickName;
     }
 
     private void SetHealthRPC(float value)
     {
-        if (view.IsMine)
-        {
-            SetHealth(value);
-        }
-        else
-        {
-            view.RPC("SetHealth", view.Owner, value);
-        }
+        SingletonHandler.damageShower
+            .ShowDamage((int)(health - value), _ownerName, caption, value <= 0);
+        
+        view.RPC("SetHealth", view.Owner, value);
     }
     
     [PunRPC]
-    public void SetHealth(float value)
+    private void SetHealth(float value)
     {
         health = value;
 
@@ -49,6 +45,14 @@ public class Module : MonoBehaviour, IModule, IPunObservable
         view.RPC("OnDestroyed", RpcTarget.All);
     }
 
+    private void LogDamage(float newHealth)
+    {
+        if (!showable) return;
+        
+        DamageShower.Instance.ShowDamage
+            ((int)(health - newHealth), _ownerName, connectedObject.name, health - newHealth <= 0);
+    }
+
     
     //todo: maybe put this in func below
     [PunRPC]
@@ -56,6 +60,8 @@ public class Module : MonoBehaviour, IModule, IPunObservable
     {
         Destroy(connectedObject);
     }
+
+
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

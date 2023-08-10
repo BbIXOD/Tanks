@@ -10,7 +10,7 @@ public class HealthShower : MonoBehaviour
         textInstance,
         barInstance;
 
-    private const float IncrementY = 60;
+    private const float IncrementY = -60;
     
     private Module[] _modules;
 
@@ -23,7 +23,7 @@ public class HealthShower : MonoBehaviour
     {
         var posY = 0f;
         
-        foreach (var module in _modules.Where(x => x != null))
+        foreach (var module in _modules.Where(x => x != null && x.showable))
         {
             var text = Instantiate(textInstance, parent);
             text.transform.Translate(0, posY, 0);

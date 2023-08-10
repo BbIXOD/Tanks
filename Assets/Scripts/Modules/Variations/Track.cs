@@ -4,27 +4,19 @@ using UnityEngine;
 public class Track : MonoBehaviour
 {
     [NonSerialized]public float power;
+    private float _curPower;
+    private Vector3 _velocityAccum;
+    
     private Rigidbody _rigidbody;
     private MovementData _movementData;
     [SerializeField]private GroundChecker checker;
+    
+    public bool OnGround => checker.OnGround;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponentInParent<Rigidbody>();
         _movementData = GetComponentInParent<MovementData>();
     }
-
-    private void FixedUpdate()
-    {
-        if (!checker.OnGround)
-        {
-            return;
-        }
-
-        power *= Time.fixedDeltaTime;
-
-
-        _rigidbody.velocity = transform.forward
-                              * Mathf.Lerp(_rigidbody.velocity.x, power, _movementData.enginePower);
-    }
+    
 }

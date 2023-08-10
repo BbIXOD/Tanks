@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading;
 
 public static class HelpMethods
 {
@@ -30,5 +31,12 @@ public static class HelpMethods
         }
         
         return value;
+    }
+    
+    public static Timer StartTimer(TimerCallback onElapse, int time)
+    {
+        var timer = new Timer(onElapse, null, time, Timeout.Infinite);
+        
+        return timer;
     }
 }

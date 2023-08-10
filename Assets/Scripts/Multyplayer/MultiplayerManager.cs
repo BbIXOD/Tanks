@@ -8,7 +8,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
     private const string TankFolder = "Tanks/";
     private Transform[] _spawns;
     [SerializeField]private GameObject canvas, menu;
-     private GameObject player;
+     private GameObject _player;
 
     private bool _leaving;
     
@@ -17,6 +17,8 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
     {
         _spawns = GetChildren(transform);
         CreateCanvas();
+
+        SingletonHandler.damageShower = GetComponent<DamageShower>();
         
         SpawnPlayer();
     }
@@ -29,7 +31,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         _leaving = true;
-        PhotonNetwork.Destroy(player);
+        PhotonNetwork.Destroy(_player);
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel("StartRoom");
     }
@@ -50,13 +52,14 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
     //todo: remove magic numbers
     private void CreateCanvas()
     {
-        var curCanvas = Instantiate(canvas);
-        CanvasHandler.cameraSight = curCanvas.transform.GetChild(0);
-        CanvasHandler.gunSight = curCanvas.transform.GetChild(1);
-        CanvasHandler.healthHolder = curCanvas.transform.GetChild(2);
+        var curCanvas = Instantiate(canvas).transform;
+        SingletonHandler.inGameCanvas = curCanvas;
+        SingletonHandler.cameraSight = curCanvas.GetChild(0);
+        SingletonHandler.gunSight = curCanvas.GetChild(1);
+        SingletonHandler.healthHolder = curCanvas.GetChild(2);
 
-        CanvasHandler.menu = Instantiate(menu);
-        var button = CanvasHandler.menu.transform.GetComponentInChildren<Button>();
+        SingletonHandler.menu = Instantiate(menu);
+        var button = SingletonHandler.menu.transform.GetComponentInChildren<Button>();
         button.onClick.AddListener(LeaveRoom);
 
 
@@ -71,7 +74,7 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks
         
         var spawn = _spawns[Random.Range(0, _spawns.Length)];
 
-        player = PhotonNetwork.Instantiate
+        _player = PhotonNetwork.Instantiate
         (TankFolder + PlayerPrefsKeys.tankModel,
             spawn.position, spawn.rotation);
     }
