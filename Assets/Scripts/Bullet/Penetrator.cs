@@ -87,6 +87,7 @@ public class Penetrator : MonoBehaviour
             return;
         }
         
-        module.Health -= _bullet.damage;
+        module.Root.Health -= _bullet.damage;
+        other.GetComponentInParent<SelfDamageShower>().Show((int)_bullet.damage, module.Root.caption, _bullet.transform.position);
     }
 }

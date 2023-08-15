@@ -39,6 +39,7 @@ public class Controller : MonoBehaviour
     {
         _controls.Enable();
         _controls.Basic.Identify.performed += Identify;
+        _controls.Basic.SelfIdentify.performed += SelfIdentify;
         _controls.Menu.SetActive.performed += SetActive;
 
 
@@ -53,6 +54,8 @@ public class Controller : MonoBehaviour
         }
         _controls.Disable();
         _controls.Menu.SetActive.performed -= SetActive;
+        _controls.Basic.Identify.performed -= Identify;
+        _controls.Basic.SelfIdentify.performed -= SelfIdentify;
 
         Cursor.visible = true;
     }
@@ -120,6 +123,11 @@ public class Controller : MonoBehaviour
     private void Identify(InputAction.CallbackContext context)
     {
         _scanner.Scan();
+    }
+    
+    private void SelfIdentify(InputAction.CallbackContext context)
+    {
+        _scanner.SelfScan();
     }
 }
 

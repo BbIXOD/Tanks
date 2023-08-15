@@ -1,5 +1,5 @@
 
 public interface IModule
-{
-    public float Health { get; set; }
+{ 
+    public Module Root { get; }
 }

@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 345687563023112918}
   - component: {fileID: 5806215183692774345}
   - component: {fileID: 104975905909844930}
+  - component: {fileID: 3373806952045664539}
   m_Layer: 0
   m_Name: Pz. III X
   m_TagString: Untagged
@@ -634,6 +635,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textInstance: {fileID: 7669490313334602288, guid: 8d25ed50fefaa6f45834db223cf8951e, type: 3}
   barInstance: {fileID: 7986332081142440798, guid: be6350ffcc07d234aa3cdb06174c43d4, type: 3}
+--- !u!114 &3373806952045664539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445943007820830035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d44901c9c5b2e4cb509cd7fee6055d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrow: {fileID: 322706378860398381, guid: 6ef5d35635bd35548b3e398338755c0d, type: 3}
 --- !u!1001 &345687562333628176
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -71,6 +71,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Self-Identify"",
+                    ""type"": ""Button"",
+                    ""id"": ""07a1be55-7e65-4d84-9a2e-d5ca216b0923"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Identify"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80d1772d-c012-4bf2-b408-26e8227e1a7d"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Self-Identify"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -219,6 +239,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Basic_Shooting = m_Basic.FindAction("Shooting", throwIfNotFound: true);
         m_Basic_Reload = m_Basic.FindAction("Reload", throwIfNotFound: true);
         m_Basic_Identify = m_Basic.FindAction("Identify", throwIfNotFound: true);
+        m_Basic_SelfIdentify = m_Basic.FindAction("Self-Identify", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_SetActive = m_Menu.FindAction("SetActive", throwIfNotFound: true);
@@ -288,6 +309,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Basic_Shooting;
     private readonly InputAction m_Basic_Reload;
     private readonly InputAction m_Basic_Identify;
+    private readonly InputAction m_Basic_SelfIdentify;
     public struct BasicActions
     {
         private @Controls m_Wrapper;
@@ -297,6 +319,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Shooting => m_Wrapper.m_Basic_Shooting;
         public InputAction @Reload => m_Wrapper.m_Basic_Reload;
         public InputAction @Identify => m_Wrapper.m_Basic_Identify;
+        public InputAction @SelfIdentify => m_Wrapper.m_Basic_SelfIdentify;
         public InputActionMap Get() { return m_Wrapper.m_Basic; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -321,6 +344,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Identify.started += instance.OnIdentify;
             @Identify.performed += instance.OnIdentify;
             @Identify.canceled += instance.OnIdentify;
+            @SelfIdentify.started += instance.OnSelfIdentify;
+            @SelfIdentify.performed += instance.OnSelfIdentify;
+            @SelfIdentify.canceled += instance.OnSelfIdentify;
         }
 
         private void UnregisterCallbacks(IBasicActions instance)
@@ -340,6 +366,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Identify.started -= instance.OnIdentify;
             @Identify.performed -= instance.OnIdentify;
             @Identify.canceled -= instance.OnIdentify;
+            @SelfIdentify.started -= instance.OnSelfIdentify;
+            @SelfIdentify.performed -= instance.OnSelfIdentify;
+            @SelfIdentify.canceled -= instance.OnSelfIdentify;
         }
 
         public void RemoveCallbacks(IBasicActions instance)
@@ -419,6 +448,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnShooting(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnIdentify(InputAction.CallbackContext context);
+        void OnSelfIdentify(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

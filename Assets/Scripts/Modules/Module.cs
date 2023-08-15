@@ -8,6 +8,7 @@ public class Module : MonoBehaviour, IModule, IPunObservable
     [NonSerialized] public float maxHealth;
     public string caption;
     public float Health { get => health; set => SetHealthRPC(value); }
+    public Module Root => this;
     [SerializeField]private GameObject connectedObject;
     public PhotonView view;
 

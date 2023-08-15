@@ -8,6 +8,7 @@ public class Scanner : MonoBehaviour
 
     private readonly List<GameObject> _showers = new();
     private Transform _wrapper;
+    private HealthShower _myShower;
     
     private bool _hidden;
 
@@ -15,6 +16,7 @@ public class Scanner : MonoBehaviour
     {
         _wrapper = SingletonHandler.healthHolder;
         _wrapper.gameObject.SetActive(false);
+        _myShower = GetComponentInParent<HealthShower>();
     }
 
     private void FixedUpdate()
@@ -32,7 +34,7 @@ public class Scanner : MonoBehaviour
 
     public void Scan()
     {
-        _hidden = false;
+        
         var tr = transform;
         
         if (!Physics.Raycast(tr.position, tr.forward, out var hit))
@@ -46,6 +48,17 @@ public class Scanner : MonoBehaviour
             return;
         }
 
+        Show(shower);
+    }
+
+    public void SelfScan()
+    {
+        Show(_myShower);
+    }
+
+    private void Show(HealthShower shower)
+    {
+        _hidden = false;
         _timer = MaxTime;
         DestroyAllInList();
         _wrapper.gameObject.SetActive(true);
